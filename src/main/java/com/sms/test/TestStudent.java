@@ -1,5 +1,6 @@
-package com.sms.dao;
+package com.sms.test;
 
+import com.sms.dao.StudentDAO;
 import com.sms.model.Student;
 
 import java.util.List;

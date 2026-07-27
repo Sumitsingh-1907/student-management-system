@@ -1,4 +1,6 @@
-package com.sms.db;
+package com.sms.test;
+
+import com.sms.db.DBConnection;
 
 import java.sql.Connection;
 
