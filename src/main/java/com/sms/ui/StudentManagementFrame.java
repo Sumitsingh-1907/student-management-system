@@ -18,6 +18,7 @@ public class StudentManagementFrame extends JFrame {
         title.setFont(new Font("Arial", Font.BOLD, 18));
 
         JButton addButton = new JButton("Add Student");
+        addButton.addActionListener(e -> new AddStudentFrame());
         JButton viewButton = new JButton("View Students");
         JButton updateButton = new JButton("Update Student");
         JButton deleteButton = new JButton("Delete Student");
