@@ -73,4 +73,52 @@ public class StudentDAO {
 
         return students;
     }
+
+    // Update Student
+    public boolean updateStudent(Student student) {
+
+        String sql = "UPDATE students SET first_name=?, last_name=?, gender=?, age=?, email=?, phone=?, course=?, address=? WHERE id=?";
+
+        try (Connection connection = DBConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setString(1, student.getFirstName());
+            statement.setString(2, student.getLastName());
+            statement.setString(3, student.getGender());
+            statement.setInt(4, student.getAge());
+            statement.setString(5, student.getEmail());
+            statement.setString(6, student.getPhone());
+            statement.setString(7, student.getCourse());
+            statement.setString(8, student.getAddress());
+            statement.setInt(9, student.getId());
+
+            int rows = statement.executeUpdate();
+
+            return rows > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    // Delete Student
+    public boolean deleteStudent(int id) {
+
+        String sql = "DELETE FROM students WHERE id=?";
+
+        try (Connection connection = DBConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setInt(1, id);
+
+            int rows = statement.executeUpdate();
+
+            return rows > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
