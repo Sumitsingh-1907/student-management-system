@@ -3,10 +3,7 @@ package com.sms.dao;
 import com.sms.db.DBConnection;
 import com.sms.model.Student;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,14 +26,13 @@ public class StudentDAO {
             statement.setString(7, student.getCourse());
             statement.setString(8, student.getAddress());
 
-            int rows = statement.executeUpdate();
-
-            return rows > 0;
+            return statement.executeUpdate() > 0;
 
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
         }
+
+        return false;
     }
 
     // View All Students
@@ -74,6 +70,42 @@ public class StudentDAO {
         return students;
     }
 
+    // Get Student By ID
+    public Student getStudentById(int id) {
+
+        String sql = "SELECT * FROM students WHERE id=?";
+
+        try (Connection connection = DBConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setInt(1, id);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+
+                Student student = new Student();
+
+                student.setId(resultSet.getInt("id"));
+                student.setFirstName(resultSet.getString("first_name"));
+                student.setLastName(resultSet.getString("last_name"));
+                student.setGender(resultSet.getString("gender"));
+                student.setAge(resultSet.getInt("age"));
+                student.setEmail(resultSet.getString("email"));
+                student.setPhone(resultSet.getString("phone"));
+                student.setCourse(resultSet.getString("course"));
+                student.setAddress(resultSet.getString("address"));
+
+                return student;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
     // Update Student
     public boolean updateStudent(Student student) {
 
@@ -92,14 +124,13 @@ public class StudentDAO {
             statement.setString(8, student.getAddress());
             statement.setInt(9, student.getId());
 
-            int rows = statement.executeUpdate();
-
-            return rows > 0;
+            return statement.executeUpdate() > 0;
 
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
         }
+
+        return false;
     }
 
     // Delete Student
@@ -112,13 +143,12 @@ public class StudentDAO {
 
             statement.setInt(1, id);
 
-            int rows = statement.executeUpdate();
-
-            return rows > 0;
+            return statement.executeUpdate() > 0;
 
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
         }
+
+        return false;
     }
 }

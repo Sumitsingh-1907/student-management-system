@@ -28,8 +28,7 @@ public class StudentManagementFrame extends JFrame {
 
         viewButton.addActionListener(e -> new ViewStudentsFrame());
 
-        updateButton.addActionListener(e ->
-                JOptionPane.showMessageDialog(this, "Update Student - Coming Soon"));
+        updateButton.addActionListener(e -> new UpdateStudentFrame());
 
         deleteButton.addActionListener(e ->
                 JOptionPane.showMessageDialog(this, "Delete Student - Coming Soon"));

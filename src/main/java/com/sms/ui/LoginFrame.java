@@ -18,6 +18,7 @@ public class LoginFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel panel = new JPanel(new GridLayout(4, 2, 10, 10));
+        panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
         JLabel userLabel = new JLabel("Username:");
         JLabel passLabel = new JLabel("Password:");
@@ -27,8 +28,6 @@ public class LoginFrame extends JFrame {
 
         JButton loginButton = new JButton("Login");
         JButton exitButton = new JButton("Exit");
-
-        panel.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
 
         panel.add(userLabel);
         panel.add(usernameField);
